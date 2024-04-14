@@ -1,17 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
 
-function Home() {
-  return (
-    <Wrapper className="test">hi</Wrapper>
-  )
-}
+import React from "react";
+import styled from "styled-components";
+
+const Home = () => {
+  return <Wrapper className="test">Home</Wrapper>;
+};
 
 const Wrapper = styled.section`
-background-color:${({theme})=>theme.colors.helper};
-width:50rem;
-height:50rem;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.bg};
 `;
 
-
-export default Home
+export default Home;
