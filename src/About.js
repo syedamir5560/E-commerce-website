@@ -1,7 +1,14 @@
 import React from "react";
+import HeroSection from "./components/HeroSection";
+
 
 const About = () => {
-  return <div>About</div>;
+
+  const data = {
+    name:"Aamir E-commerce"
+  }
+
+  return <HeroSection myData={data}/>;
 };
 
 export default About;

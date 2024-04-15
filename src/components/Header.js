@@ -7,7 +7,7 @@ function Header() {
     return (
         <MainHeader>
             <NavLink to="/">
-                <img src='./images/logo.png' className='logo'/>
+                <img src='./images/1686177967-AmirStore.webp' className='logo'/>
             </NavLink>
             <Nav />
         </MainHeader>
@@ -24,7 +24,7 @@ const MainHeader = styled.header`
   position: relative;
 
   .logo {
-    height: 3rem;
+    height: 8rem;
   }
 `;
 

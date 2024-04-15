@@ -1,11 +1,15 @@
 
 import React from "react";
-import styled from "styled-components";
 import HeroSection from "./components/HeroSection";
 
 const Home = () => {
+
+  const data = {
+    name:"Aamir Store"
+  }
+
   return (
-    <HeroSection/>
+    <HeroSection myData={data}/>
   )
 };
 

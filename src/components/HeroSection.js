@@ -3,14 +3,17 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 
-function HeroSection() {
+function HeroSection({ myData }) {
+
+    const {name}  = myData 
+
   return (
     <Wrapper>
       <div className="container">
         <div className="grid grid-two-column">
           <div className="hero-section-data">
             <p className="intro-data">Welcome to </p>
-            <h1> name </h1>
+            <h1> {name} </h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
               atque temporibus veniam doloribus libero ad error omnis voluptates
