@@ -7,7 +7,7 @@ function Header() {
     return (
         <MainHeader>
             <NavLink to="/">
-                <img src='./images/1686177967-AmirStore.webp' className='logo'/>
+                <img src='./images/1686177967-AmirStore.webp' className='logo' />
             </NavLink>
             <Nav />
         </MainHeader>
@@ -27,8 +27,5 @@ const MainHeader = styled.header`
     height: 8rem;
   }
 `;
-
-
-
 
 export default Header
