@@ -1,25 +1,22 @@
-import React from "react";
+import { useContext } from "react";
 import HeroSection from "./components/HeroSection";
-import Services from "./components/Services";
-import Trusted from "./components/Trusted";
+import { useProductContext } from "./Context/productcontext";
 
 
 const About = () => {
 
+  const myName=useProductContext()
+
   const data = {
-    name:"Aamir E-commerce"
-  }
+    name: "Thapa Ecommerce",
+  };
 
   return (
     <>
-
+      {myName}
       <HeroSection myData={data} />
-   
-     
-
     </>
-
-  )
+  );
 };
 
 export default About;

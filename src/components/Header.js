@@ -9,7 +9,7 @@ function Header() {
             <NavLink to="/">
                 <img src='./images/1686177967-AmirStore.webp' className='logo' />
             </NavLink>
-            <Nav />
+            <Nav /> 
         </MainHeader>
     )
 }
