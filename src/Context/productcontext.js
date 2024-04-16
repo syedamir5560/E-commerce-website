@@ -1,50 +1,44 @@
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useReducer } from "react";
-import { useEffect } from "react";
-import { createContext, useContext } from "react";
+import reducer from "../Reducer/productReducer"
 
-const AppContext = createContext()
+const AppContext = createContext();
 
+const API = "https://api.pujakaitem.com/api/products";
 
-const API = 'https://api.pujakaitem.com/api/products'
+const initialState = {
+  isLoading: false,
+  isError: false,
+  products: [],
+  featureProducts: [],
+};
 
 const AppProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-    const initialState = {
-        isLoading: false,
-        isError: false,
-        products: [],
-        featureProducts: []
+  const getProducts = async (url) => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      const res = await axios.get(url);
+      const products = await res.data;
+      dispatch({ type: "SET_API_DATA", payload: products });
+    } catch (error) {
+      dispatch({ type: "API_ERROR" });
     }
+  };
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+  useEffect(() => {
+    getProducts(API);
+  }, []);
 
-    const getProduct = async (url) => {
-        dispatch({ type: 'SET_LOADING' })
-        try {
-            const res = await axios.get(url)
-            const products = await res.data
-            dispatch({ type: 'SET_API_DATA', payload: products })
-        } catch (error) {
-            dispatch({ type: 'API_ERROR' })
-        }
-
-    }
-
-    useEffect(() => {
-        getProduct(API)
-    }, [])
-
-    return <AppContext.Provider value={{ ...state }}>
-        {children}
-    </AppContext.Provider>
-}
+  return (
+    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+  );
+};
 
 // custom hooks
-
 const useProductContext = () => {
-    return useContext(AppContext)
-}
+  return useContext(AppContext);
+};
 
-export { AppProvider, AppContext, useProductContext }
+export { AppProvider, AppContext, useProductContext };
