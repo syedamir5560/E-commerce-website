@@ -10,25 +10,28 @@ import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Stars from "./components/Stars";
 import axios from "axios";
+import AddToCart from "./components/AddToCart";
+import CartAmountToggle from "./components/CartAmountToggle";
 
 const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
   // const { getSingleProduct } =
-    useProductContext();
+  useProductContext();
 
   const [product, setProduct] = useState({})
   const [loading, setLoading] = useState(false)
 
+
   // console.log(singleProduct)
 
-  const getProduct = useCallback(async ()=>{
+  const getProduct = useCallback(async () => {
     setLoading(true)
-    const {data}=  await axios.get(`${API}?id=${id}`)
+    const { data } = await axios.get(`${API}?id=${id}`)
     setProduct(data)
     setLoading(false)
   }, [])
-  
+
   // const {
   //   id: alias,
   //   name,
@@ -52,11 +55,11 @@ const SingleProduct = () => {
     // getSingleProduct(`${API}?id=${id}`);
     getProduct()
     console.log(product)
-    
+
   }, []);
 
   if (loading) {
-    return <div className="page_loading">Loading.....</div>;
+    return <div className="page_loading" style={{ fontSize: '30px', textAlign: 'center', marginTop: '10vh', color: 'red' }}>Loading.....</div>;
   }
 
   return (
@@ -118,14 +121,16 @@ const SingleProduct = () => {
                 Brand :<span> {product.company} </span>
               </p>
             </div>
+            <hr />
+            {
+              product.stock > 0 && <AddToCart product={product} />
+            }
           </div>
+         
         </div>
       </Container>
     </Wrapper>
-    // <>
-    // Hi</>
 
-    
   )
 
 
