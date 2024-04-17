@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 
 function CartAmountToggle({ amount, setInc, setDec }) {
@@ -14,6 +15,7 @@ function CartAmountToggle({ amount, setInc, setDec }) {
                     <FaPlus />
                 </button>
             </div>
+            
         </div>
     )
 }

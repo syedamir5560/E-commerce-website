@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { FaCheck } from "react-icons/fa";
 import { useState } from 'react';
 import CartAmountToggle from './CartAmountToggle';
+import { Button } from "../styles/Button"
+import { NavLink } from 'react-router-dom';
 
 
 function AddToCart({ product }) {
@@ -41,6 +43,9 @@ function AddToCart({ product }) {
                     }
                 </p>
                 <CartAmountToggle setInc={setInc} setDec={setDec} amount={amount}/>
+                <NavLink to='/cart'>
+                <Button className='btn'>Add To Cart</Button>
+            </NavLink>
             </div>
            
         </Wrapper>
