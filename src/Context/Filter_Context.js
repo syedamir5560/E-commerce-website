@@ -6,10 +6,12 @@ import reducer from "../Reducer/filterReducer"
 const FilterContext = createContext()
 
 const initialState = {
-  filter_products:[],
-  all_products:[],
-  gride_view:false
-  };
+    filter_products: [],
+    all_products: [],
+    gride_view: false,
+    sorting_value: "highest"
+
+};
 
 
 export const FilterContextProvider = ({ children }) => {
@@ -19,17 +21,28 @@ export const FilterContextProvider = ({ children }) => {
     // console.log(products )
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const setGrideView=()=>{
-        return dispatch({type:"SET_GRIDVIEW"})
+    const setGrideView = () => {
+        return dispatch({ type: "SET_GRIDVIEW" })
+    }
+    const setListView = () => {
+        return dispatch({ type: "SET_LISTVIEW" })
     }
 
+    const Sorting = () => {
+        dispatch({ type: "GET_SORT_VALUE" })
+    }
 
-    useEffect(()=>{
-            dispatch({type:"LOAD_FILTER_PRODUCTS" , payload:products})
-    },[products])
+    useEffect(() => {
+        console.log("gh")
+    }, [state.sorting_value])
+
+
+    useEffect(() => {
+        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
+    }, [products])
 
     return (
-        <FilterContext.Provider value={{...state,setGrideView}}>
+        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting }}>
             {children}
         </FilterContext.Provider>
     )
