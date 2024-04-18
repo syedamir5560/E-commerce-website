@@ -9,8 +9,10 @@ const initialState = {
     filter_products: [],
     all_products: [],
     gride_view: false,
-    sorting_value: "highest"
-
+    sorting_value: "highest",
+    filters: {
+        text:"",
+    },
 };
 
 
@@ -38,13 +40,20 @@ export const FilterContextProvider = ({ children }) => {
         dispatch({ type: 'SORTING_PRODUCTS' })
     }, [state.sorting_value])
 
+    const updateFilterValue = (event) => {
+        let name = event.target.name;
+        let value = event.target.value
+
+        return dispatch({ type: "UPDATE_FILTER_VALUE" , payload:{name,value}})
+    }
+
 
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
     }, [products])
 
     return (
-        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting }}>
+        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting,updateFilterValue }}>
             {children}
         </FilterContext.Provider>
     )
