@@ -28,12 +28,14 @@ export const FilterContextProvider = ({ children }) => {
         return dispatch({ type: "SET_LISTVIEW" })
     }
 
-    const Sorting = () => {
-        dispatch({ type: "GET_SORT_VALUE" })
+    const Sorting = (event) => {
+        let userValue = event.target.value
+        dispatch({ type: "GET_SORT_VALUE", payload: userValue })
     }
 
+    // to sort the product
     useEffect(() => {
-        console.log("gh")
+        dispatch({ type: 'SORTING_PRODUCTS' })
     }, [state.sorting_value])
 
 
