@@ -11,7 +11,7 @@ const initialState = {
     gride_view: false,
     sorting_value: "highest",
     filters: {
-        text:"",
+        text: "",
     },
 };
 
@@ -44,7 +44,7 @@ export const FilterContextProvider = ({ children }) => {
         let name = event.target.name;
         let value = event.target.value
 
-        return dispatch({ type: "UPDATE_FILTER_VALUE" , payload:{name,value}})
+        return dispatch({ type: "UPDATE_FILTER_VALUE", payload: { name, value } })
     }
 
 
@@ -53,7 +53,7 @@ export const FilterContextProvider = ({ children }) => {
     }, [products])
 
     return (
-        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting,updateFilterValue }}>
+        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting, updateFilterValue }}>
             {children}
         </FilterContext.Provider>
     )
