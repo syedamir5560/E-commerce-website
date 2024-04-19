@@ -4,9 +4,9 @@ import { useFilterContext } from '../Context/Filter_Context';
 
 function FilterSection() {
   const {
-    filters: { text, category, color, name },
-    updateFilterValue,
-    all_products,
+    filters: { text },
+    updateFilterValue
+
   } = useFilterContext();
   return (
     <Wrapper>

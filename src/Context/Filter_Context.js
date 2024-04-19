@@ -12,7 +12,7 @@ const initialState = {
     sorting_value: "highest",
     filters: {
         text: "",
-    },
+    }
 };
 
 
@@ -37,18 +37,22 @@ export const FilterContextProvider = ({ children }) => {
 
     // to sort the product
     useEffect(() => {
+        dispatch({ type: "FILTER_PRODUCTS" });
         dispatch({ type: 'SORTING_PRODUCTS' })
-    }, [state.sorting_value])
+    }, [products, state.sorting_value, state.filters])
+
+    // update the filter values
 
     const updateFilterValue = (event) => {
         let name = event.target.name;
-        let value = event.target.value
+        let value = event.target.value;
 
-        return dispatch({ type: "UPDATE_FILTER_VALUE", payload: { name, value } })
-    }
+        return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
+    };
 
 
     useEffect(() => {
+
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
     }, [products])
 
