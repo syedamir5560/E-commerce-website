@@ -12,6 +12,8 @@ const initialState = {
     sorting_value: "highest",
     filters: {
         text: "",
+        category:'all',
+        company:'all'
     }
 };
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useFilterContext } from '../Context/Filter_Context';
+import { Button } from '../styles/Button';
+
 
 function FilterSection() {
 
@@ -11,14 +13,15 @@ function FilterSection() {
 
   } = useFilterContext();
 
-const getUniqueData =(data,property)=>{
- let newVal = data.map((curEle)=>{
-        return curEle[property]
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((curEle) => {
+      return curEle[property]
     })
-     newVal=["All",...new Set(newVal)]
-   console.log(newVal)
-}
-getUniqueData(all_products,"category")
+    return (newVal = ["All", ...new Set(newVal)]
+    )
+  }
+  const categoryOnlyData = getUniqueData(all_products, "category")
+  const companyData = getUniqueData(all_products, "company")
 
 
   return (
@@ -34,6 +37,45 @@ getUniqueData(all_products,"category")
           />
         </form>
       </div>
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {categoryOnlyData.map((curElem, index) => {
+            return (
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={curElem}
+               
+                onClick={updateFilterValue}>
+                {curElem}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="filter-company">
+        <h3>Company</h3>
+
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFilterValue}>
+            {companyData.map((curElem, index) => {
+              return (
+                <option key={index} value={curElem} name="company">
+                  {curElem}
+                </option>
+              );
+            })}
+          </select>
+        </form>
+      </div>
+
     </Wrapper>
   )
 }
