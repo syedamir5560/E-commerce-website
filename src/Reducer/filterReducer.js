@@ -1,10 +1,20 @@
 const filterReducer = (state, action) => {
     switch (action.type) {
         case "LOAD_FILTER_PRODUCTS":
+
+        let priceArr = action.payload.map((curElem)=>{
+            return curElem.price
+
+           
+        })
+        let max=Math.max(...priceArr)
+        console.log(max)
+
             return {
                 ...state,
                 filter_products: [...action.payload],
-                all_products: [...action.payload]
+                all_products: [...action.payload],
+                filters:{...state.filters, maxPrice:maxPrice, price:maxPrice},
             };
 
 
@@ -59,55 +69,53 @@ const filterReducer = (state, action) => {
                 filter_products: newSortData,
             };
 
-            case "UPDATE_FILTERS_VALUE":
-                const { name, value } = action.payload;
-          
-                return {
-                  ...state,
-                  filters: {
+        case "UPDATE_FILTERS_VALUE":
+            const { name, value } = action.payload;
+
+            return {
+                ...state,
+                filters: {
                     ...state.filters,
                     [name]: value,
-                  },
-                };
+                },
+            };
 
-             
-                    case "FILTER_PRODUCTS":
-                        let { all_products } = state;
-                        let tempFilterProduct = [...all_products];
-                  
-                        const { text, category, company, colors } = state.filters;
-                  
-                        if (text) {
-                          tempFilterProduct = tempFilterProduct.filter((curElem) => {
-                            return curElem.name.toLowerCase().includes(text);
-                          });
-                        }
 
-                        if(category !== "all"){
-                            tempFilterProduct = tempFilterProduct.filter((curElem)=>{
-                                return curElem.category === category;
-                            })
-                        }
+        case "FILTER_PRODUCTS":
+            let { all_products } = state;
+            let tempFilterProduct = [...all_products];
 
-                        if(company !== "all"){
-                            tempFilterProduct = tempFilterProduct.filter((curElem)=>{
-                                return curElem.company.toLowerCase() === company.toLowerCase();
-                            })
-                        }
+            const { text, category, company, colors } = state.filters;
 
-                        if(colors){
-                            tempFilterProduct = tempFilterProduct.filter((curElem)=>{
-                                 curElem.colors.includes(colors)    
-                            })
-                        }
+            if (text) {
+                tempFilterProduct = tempFilterProduct.filter((curElem) => {
+                    return curElem.name.toLowerCase().includes(text);
+                });
+            }
 
-              
+            if (category !== "all") {
+                tempFilterProduct = tempFilterProduct.filter((curElem) => {
+                    return curElem.category === category;
+                })
+            }
 
-                        return {
-                            ...state,
-                            filter_products: tempFilterProduct,
-                          };
-            
+            if (company !== "all") {
+                tempFilterProduct = tempFilterProduct.filter((curElem) => {
+                    return curElem.company.toLowerCase() === company.toLowerCase();
+                })
+            }
+
+            if (colors !== 'all')  {
+                tempFilterProduct = tempFilterProduct.filter((curElem) => {
+                    curElem.colors.includes(colors)
+                })
+            }
+
+            return {
+                ...state,
+                filter_products: tempFilterProduct,
+            };
+
         default:
             return state
     }

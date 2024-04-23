@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useFilterContext } from '../Context/Filter_Context';
 // import { Button } from '../styles/Button';
+import { FaCheck } from "react-icons/fa";
 
 
 function FilterSection() {
@@ -82,23 +83,40 @@ function FilterSection() {
         </form>
       </div>
 
-      <div className="filter-color-style">
+      <div className="filter-colors colors">
+        <h3>Colors</h3>
 
-        {colorsData.map((curColor, index) => {
-          return (
-            <button
-              key={index}
-              style={{ backgroundColor: curColor }}
-              type="button"
-              name="colors"
-              value={curColor}
-              className='btnStyle'
-              onClick={updateFilterValue}>
-              {colors === curColor ? "" : null}
-            </button>
-          );
-        })}
+        <div className="filter-color-style">
+          {colorsData.map((curColor, index) => {
+            if (curColor === "all") {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  value={curColor}
+                  name="color"
+                  className="color-all--style"
+                  onClick={updateFilterValue}>
+                  all
+                </button>
+              );
+            }
+            return (
+              <button
+                key={index}
+                type="button"
+                value={curColor}
+                name="colors"
+                style={{ backgroundColor: curColor }}
+                className={colors === curColor ? "btnStyle active" : "btnStyle"}
+                onClick={updateFilterValue}>
+                {colors === curColor ? <FaCheck className="checkStyle" /> : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
+
     </Wrapper>
   )
 }
