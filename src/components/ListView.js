@@ -6,7 +6,7 @@ import { Button } from "../styles/Button";
 const ListView = ({ products }) => {
   return (
     <Wrapper className="section">
-      <div className="container grid">
+   <div className="container grid">
         {products.map((curElem) => {
           const { id, name, image, price, description } = curElem;
           return (
@@ -29,8 +29,8 @@ const ListView = ({ products }) => {
             </div>
           );
         })}
-      </div>
-      <h3>list view</h3>
+      </div> 
+   
     </Wrapper>
   );
 };

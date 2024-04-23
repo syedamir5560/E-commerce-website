@@ -17,12 +17,18 @@ function FilterSection() {
     let newVal = data.map((curEle) => {
       return curEle[property]
     })
-    return (newVal = ["All", ...new Set(newVal)]
-    )
+
+    if (property === "colors") {
+      // return (newVal = ["All", new Set([].concat(...newVal))])
+      newVal = newVal.flat();
+    }
+    return (newVal = ["all", ...new Set(newVal)])
   }
+
   const categoryOnlyData = getUniqueData(all_products, "category")
   const companyData = getUniqueData(all_products, "company")
-
+  const colorsData = getUniqueData(all_products, "colors")
+  console.log(colorsData)
 
   return (
     <Wrapper>
@@ -47,7 +53,7 @@ function FilterSection() {
                 type="button"
                 name="category"
                 value={curElem}
-               
+                // className={curElem === category ? "active" : ""}  
                 onClick={updateFilterValue}>
                 {curElem}
               </button>
@@ -58,7 +64,6 @@ function FilterSection() {
 
       <div className="filter-company">
         <h3>Company</h3>
-
         <form action="#">
           <select
             name="company"
