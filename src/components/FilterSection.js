@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useFilterContext } from '../Context/Filter_Context';
-import { Button } from '../styles/Button';
+// import { Button } from '../styles/Button';
 
 
 function FilterSection() {
 
   const {
-    filters: { text },
+    filters: { text, category, colors },
     updateFilterValue,
     all_products,
 
@@ -43,6 +43,7 @@ function FilterSection() {
           />
         </form>
       </div>
+
       <div className="filter-category">
         <h3>Category</h3>
         <div>
@@ -81,6 +82,23 @@ function FilterSection() {
         </form>
       </div>
 
+      <div className="filter-color-style">
+
+        {colorsData.map((curColor, index) => {
+          return (
+            <button
+              key={index}
+              style={{ backgroundColor: curColor }}
+              type="button"
+              name="colors"
+              value={curColor}
+              className='btnStyle'
+              onClick={updateFilterValue}>
+              {colors === curColor ? "" : null}
+            </button>
+          );
+        })}
+      </div>
     </Wrapper>
   )
 }
