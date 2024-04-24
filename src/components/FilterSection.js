@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { useFilterContext } from '../Context/Filter_Context';
 // import { Button } from '../styles/Button';
 import { FaCheck } from "react-icons/fa";
+import FormatPrice from "../Helper/FormatPrice"
 
 
 function FilterSection() {
 
   const {
-    filters: { text, category, colors },
+    filters: { text, category, colors, price, minPrice, maxPrice },
     updateFilterValue,
     all_products,
 
@@ -115,6 +116,21 @@ function FilterSection() {
             );
           })}
         </div>
+      </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
       </div>
 
     </Wrapper>

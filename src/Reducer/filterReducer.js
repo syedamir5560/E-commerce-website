@@ -2,26 +2,21 @@ const filterReducer = (state, action) => {
     switch (action.type) {
         case "LOAD_FILTER_PRODUCTS":
 
-        let priceArr = action.payload.map((curElem)=>{
-            return curElem.price
+            let priceArr = action.payload.map((curElem) => curElem.price);
+            let maxPrice = Math.max(...priceArr);
 
-           
-        })
-        let max=Math.max(...priceArr)
-        console.log(max)
 
             return {
                 ...state,
                 filter_products: [...action.payload],
                 all_products: [...action.payload],
-                filters:{...state.filters, maxPrice:maxPrice, price:maxPrice},
+                filters: { ...state.filters, maxPrice, price: maxPrice },
             };
-
 
         case "SET_GRIDVIEW":
             return {
                 ...state,
-                gride_view: true
+                gride_view: true    
             }
 
         case "SET_LISTVIEW":
@@ -85,7 +80,7 @@ const filterReducer = (state, action) => {
             let { all_products } = state;
             let tempFilterProduct = [...all_products];
 
-            const { text, category, company, colors } = state.filters;
+            const { text, category, company, colors,price } = state.filters;
 
             if (text) {
                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
@@ -105,11 +100,21 @@ const filterReducer = (state, action) => {
                 })
             }
 
-            if (colors !== 'all')  {
+            if (colors !== 'all') {
                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
                     curElem.colors.includes(colors)
                 })
             }
+
+            if (price === 0) {
+                tempFilterProduct = tempFilterProduct.filter(
+                  (curElem) => curElem.price == price
+                );
+              } else {
+                tempFilterProduct = tempFilterProduct.filter(
+                  (curElem) => curElem.price <= price
+                );
+              }
 
             return {
                 ...state,
