@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useFilterContext } from '../Context/Filter_Context';
-// import { Button } from '../styles/Button';
+import { Button } from '../styles/Button';
 import { FaCheck } from "react-icons/fa";
 import FormatPrice from "../Helper/FormatPrice"
 
@@ -12,6 +12,7 @@ function FilterSection() {
     filters: { text, category, colors, price, minPrice, maxPrice },
     updateFilterValue,
     all_products,
+    clearFilters
 
   } = useFilterContext();
 
@@ -131,6 +132,12 @@ function FilterSection() {
           value={price}
           onChange={updateFilterValue}
         />
+      </div>
+
+      <div className="filter-clear">
+        <Button className="btn" onClick={clearFilters}>
+          Clear Filters
+        </Button>
       </div>
 
     </Wrapper>

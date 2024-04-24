@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { useProductContext } from "./productcontext";
 import reducer from "../Reducer/filterReducer"
+import { type } from "@testing-library/user-event/dist/type";
 
 
 
@@ -14,12 +15,12 @@ const initialState = {
     sorting_value: "highest",
     filters: {
         text: "",
-        category:'all',
-        company:'all',
-        colors:'all',
-        maxPrice:0,
-        minPrice:0,
-        price:0
+        category: 'all',
+        company: 'all',
+        colors: 'all',
+        maxPrice: 0,
+        minPrice: 0,
+        price: 0
     }
 };
 
@@ -59,13 +60,19 @@ export const FilterContextProvider = ({ children }) => {
     };
 
 
+    // clearFilters
+
+    const clearFilters = () => {
+        dispatch({ type: "CLEAR_FILTERS" });
+    };
+
     useEffect(() => {
 
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
     }, [products])
 
     return (
-        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting, updateFilterValue }}>
+        <FilterContext.Provider value={{ ...state, setGrideView, setListView, Sorting, updateFilterValue, clearFilters }}>
             {children}
         </FilterContext.Provider>
     )
