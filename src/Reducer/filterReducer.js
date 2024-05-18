@@ -100,11 +100,11 @@ const filterReducer = (state, action) => {
                 })
             }
 
-            if (colors !== 'all') {
-                tempFilterProduct = tempFilterProduct.filter((curElem) => {
-                    curElem.colors.includes(colors)
-                })
-            }
+            // if (colors !== 'all') {
+            //     tempFilterProduct = tempFilterProduct.filter((curElem) => {
+            //         curElem.colors.includes(colors)
+            //     })
+            // }
 
             if (price === 0) {
                 tempFilterProduct = tempFilterProduct.filter(
